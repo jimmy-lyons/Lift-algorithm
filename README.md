@@ -40,30 +40,45 @@ AVAMAE Lift Solutions Ltd want to start selling lifts with two external buttons:
   * Not sure how this will be regulated - could be sensing weight or facial recognition etc - assume method is unimportant for this exercise.
   * If rule is strictly in place for this and there is a method for counting passengers, then the lift shouldn't accept any new journeys until the number of passengers is less than 8.
 ---
-## Outline Plan
+## Outline Plan (Medicine Chest)
 
-### #Objects
+### Objects
 
 **Lift**
 
-|Functions      |Variables  |
-|---------------|-----------|
+|Functions      |Variables          |
+|---------------|-------------------|
 |openDoor()     |direction (Bool)   |
 |closeDoor()    |doorOpen  (Bool)   |
 |moveToLevel()  |journey   (Array)  |
-|addLevel()     |           |
-|removeLevel()  |           |
-|resetLevel()   |           |
+|addLevel()     |level     (int)    |
+|removeLevel()  |                   |
+|resetLevel()   |                   |
 
 
 **PassengerCounter**
-|Functions      |Variables  |
-|---------------|-----------|
-|count()        |passengerNumber (int)   |
+|Functions      |Variables             |
+|---------------|----------------------|
+|count()        |passengerNumber (int) |
 
 
 **Level**
 **PassengerCounter**
-|Functions      |Variables  |
-|---------------|-----------|
+|Functions      |Variables           |
+|---------------|--------------------|
 |               |levelNumber (int)   |
+
+### Usage examples
+
+**Scenario #1:** Lift is empty, lift at level 5, button pushed at level 0.
+* *Create new instance of Level with levelNumber = 0*
+  * level0 = new Level(0)
+* *Add "level0" to lift's "journey" array*
+  * lift.addLevel(level0)
+* *Lift travels to the first level in the "journey" array*
+  * lift.moveToLevel()
+* *Lift removes "level0" from "journey" array once the floor level == first level in journey array*
+  * lift.removeLevel()
+* *Doors open and set timeout for doors to close*
+  * lift.openDoor()
+  * lift.setTimeout(5000, closeDoor())
