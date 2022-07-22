@@ -1,1 +1,1 @@
-# lift-algorithm
+# Lift Algorithm
