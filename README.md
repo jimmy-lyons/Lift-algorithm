@@ -39,4 +39,31 @@ AVAMAE Lift Solutions Ltd want to start selling lifts with two external buttons:
 * Maximum capacity of eight people:
   * Not sure how this will be regulated - could be sensing weight or facial recognition etc - assume method is unimportant for this exercise.
   * If rule is strictly in place for this and there is a method for counting passengers, then the lift shouldn't accept any new journeys until the number of passengers is less than 8.
+---
+## Outline Plan
 
+### #Objects
+
+**Lift**
+
+|Functions      |Variables  |
+|---------------|-----------|
+|openDoor()     |direction (Bool)   |
+|closeDoor()    |doorOpen  (Bool)   |
+|moveToLevel()  |journey   (Array)  |
+|addLevel()     |           |
+|removeLevel()  |           |
+|resetLevel()   |           |
+
+
+**PassengerCounter**
+|Functions      |Variables  |
+|---------------|-----------|
+|count()        |passengerNumber (int)   |
+
+
+**Level**
+**PassengerCounter**
+|Functions      |Variables  |
+|---------------|-----------|
+|               |levelNumber (int)   |
