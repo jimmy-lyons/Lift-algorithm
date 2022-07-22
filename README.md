@@ -82,3 +82,16 @@ AVAMAE Lift Solutions Ltd want to start selling lifts with two external buttons:
 * *Doors open and set timeout for doors to close*
   * lift.openDoor()
   * lift.setTimeout(5000, closeDoor())
+
+**Scenario #2:** Lift is empty, lift at level 5, button pushed at level 5, passanger wants to go to level 0
+* *Create new instance of Level with levelNumber = 5*
+  * level5 = new Level(5)
+* *Add "level5" to lift's "journey" array*
+  * lift.addLevel(level5)
+* *Lift level == level of first item in "journey" array so item is removed from array and doors open*
+  * lift.removeLevel()
+  * lift.openDoor()
+  * lift.setTimeout(5000, closeDoor())
+* *User presses level 0 button*
+  * Follow same steps as scenario 1
+
