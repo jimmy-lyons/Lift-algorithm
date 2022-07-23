@@ -106,7 +106,7 @@ Functionality thoughts
 ## Application (Medicine Chest)
 
 ```
-App {
+class App {
   counter = new PassangerCounter
   liftDoor = new LiftDoor
 
@@ -120,25 +120,30 @@ App {
     lift.addLevel(buttonLevel)
   }
 
-  // Event handler for journey array:
-  lift.journey == [] ? lift.resetLevel() : lift.moveToLevel()
+  // Event handler for journey:
+  case
+    when lift.journey != []
+      lift.moveToLevel()
+    when lift.journey == [] && lift.liftLevel != lift.resetLevel
+      lift.addLevel(resetLevel)
+  end
 
   // Event handler for when lift reaches target level:
   when lift.liftLevel == lift.tagetLevel {
     lift.openDoor(lift.journey[0])
     setTimeOut(5000, lift.closeDoor(lift.journey[0]))
     .then(lift.removeLevel())
-    .then(moveToLevel())
   }
 }
+```
 
-Lift {
+```
+class Lift {
   initialize(counter, liftDoor) {
     // instance variables to be used throughout class:
     liftCounter = counter
     liftDoor = liftDoor
-    upJourney = []
-    downJourney = []
+    journey = []
     liftLevel
     targetLevel
     direction = nil
@@ -155,14 +160,21 @@ Lift {
   }
 
   moveToLevel {
-    unless journey == [] || liftDoor.open? == true
-      // move to level journey[0]
+    checkDirection()
+    if direction == nil || liftDoor.open? == true
+      targetLevel = nil
+    else
+      // move to first level in journey array
       targetLevel = journey[0]
+    end
   }
 
   addLevel(level) {
     if level is not in array
       case
+        when direction == nil
+          journey.add(level)
+          checkDirection()
         when direction == 'up'
           journey.add(level)
           upJourney = mapUpJourney(journey)
@@ -184,8 +196,7 @@ Lift {
   }
 
   resetLevel {
-    8.00 < currentTime < 18.00 ? level = new Level(5) : level = new Level(0)
-    journey.add(level) unless liftLevel == level
+    8.00 < currentTime < 18.00 ? return new Level(5) : return new Level(0)
   }
 
   private
@@ -198,6 +209,17 @@ Lift {
   mapDownJourney(journey) {
     // map across journey array and remove floors greater than liftLevel
     // reverse order array (largest to smallest)
+  }
+
+  checkDirection {
+    case
+      when journey == []
+        direction = nil
+      when journey[0] > liftLevel
+        direction = "up"
+      when journey[0] < liftLevel
+        direction = "down"
+      end
   }
 }
 ```
