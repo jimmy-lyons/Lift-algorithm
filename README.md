@@ -24,7 +24,7 @@ AVAMAE Lift Solutions Ltd want to start selling lifts with two external buttons:
 
 ---
 
-## Key Information + Initial Thoughts/Considerations
+## Key Information + Initial Thoughts/Considerations (Medicine Chest)
 
 * One lift
 * Ten floors
@@ -39,10 +39,13 @@ AVAMAE Lift Solutions Ltd want to start selling lifts with two external buttons:
 * Maximum capacity of eight people:
   * Not sure how this will be regulated - could be sensing weight or facial recognition etc - assume method is unimportant for this exercise.
   * If rule is strictly in place for this and there is a method for counting passengers, then the lift shouldn't accept any new journeys until the number of passengers is less than 8.
+
+Functionality thoughts
+* Lifts have two sets of door: one belonging to the lift and one belonging to the level.
 ---
 ## Outline Plan (Medicine Chest)
 
-### Objects
+### Classes
 
 **Lift**
 
@@ -63,10 +66,15 @@ AVAMAE Lift Solutions Ltd want to start selling lifts with two external buttons:
 
 
 **Level**
-**PassengerCounter**
 |Functions      |Variables           |
 |---------------|--------------------|
-|               |levelNumber (int)   |
+|openDoor()     |levelNumber (int)   |
+|closeDoor()    |doorOpen?    (bool) |
+
+**LiftDoor**
+|Functions      |Variables           |
+|---------------|--------------------|
+|               |open? (bool)        |
 
 ### Usage examples
 
@@ -95,3 +103,83 @@ AVAMAE Lift Solutions Ltd want to start selling lifts with two external buttons:
 * *User presses level 0 button*
   * Follow same steps as scenario 1
 
+## Application (Medicine Chest)
+
+```
+App {
+  counter = new PassangerCounter
+  liftDoor = new LiftDoor
+
+  // create new lift instance with counter and liftDoor injected on initialisation:
+    lift = new Lift(counter, liftDoor)
+
+  // create an event listener for when a button is pushed to call the lift
+  // button should know the level it's on to create a new instance of Level class:
+    eventListener = onButtonPush(lift.addLevel(buttonLevel))
+}
+
+Lift {
+  initialize(counter, liftDoor) {
+    // instance variables to be used throughout class:
+    liftCounter = counter
+    liftDoor = liftDoor
+    upJourney = []
+    downJourney = []
+    liftLevel
+    targetLevel
+    direction = nil
+  }
+
+  openDoor(levelDoor) {
+    liftDoor.open()
+    levelDoor.open()
+  }
+
+  closeDoor {
+    liftDoor.close()
+    levelDoor.close()
+  }
+
+  moveToLevel {
+    unless upJourney == [] || downJourney == [] || liftDoor.open? == true
+      // move to level journey[0]
+      targetLevel = journey[0]
+  }
+
+  addLevel(level) {
+    case
+      when direction == 'up'
+        journey.add(level)
+        upJourney = mapUpJourney(journey)
+        downJourney = mapdownJourney(journey)
+        journey = upJourney + downJourney
+      when direction == 'down'
+        journey.add(level)
+        upJourney = mapUpJourney(journey)
+        downJourney = mapdownJourney(journey)
+        journey = downJourney + upJourney
+      when level.levelNumber == liftLevel
+        journey.insertAtIndex(level, 0)
+  }
+
+  removeLevel {
+
+  }
+
+  resetLevel {
+
+  }
+
+  private
+
+  mapUpJourney(journey) {
+    // map across journey array and remove floors less than liftLevel
+    // order array (smallest to largest)
+  }
+
+  mapDownJourney(journey) {
+    // map across journey array and remove floors greater than liftLevel
+    // reverse order array (largest to smallest)
+  }
+}
+```
