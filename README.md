@@ -113,9 +113,23 @@ App {
   // create new lift instance with counter and liftDoor injected on initialisation:
     lift = new Lift(counter, liftDoor)
 
-  // create an event listener for when a button is pushed to call the lift
-  // button should know the level it's on to create a new instance of Level class:
-    eventListener = onButtonPush(lift.addLevel(buttonLevel))
+  // Create an event halndler for when a button is pushed to call the lift,
+  // or when a button is pushed inside the lift.
+  // Button should know the level it's assigned to to create a new instance of Level class:
+  onButtonPush{
+    lift.addLevel(buttonLevel)
+  }
+
+  // Event handler for journey array:
+  lift.journey == [] ? lift.resetLevel() : lift.moveToLevel()
+
+  // Event handler for when lift reaches target level:
+  when lift.liftLevel == lift.tagetLevel {
+    lift.openDoor(lift.journey[0])
+    setTimeOut(5000, lift.closeDoor(lift.journey[0]))
+    .then(lift.removeLevel())
+    .then(moveToLevel())
+  }
 }
 
 Lift {
@@ -135,31 +149,34 @@ Lift {
     levelDoor.open()
   }
 
-  closeDoor {
+  closeDoor(levelDoor) {
     liftDoor.close()
     levelDoor.close()
   }
 
   moveToLevel {
-    unless upJourney == [] || downJourney == [] || liftDoor.open? == true
+    unless journey == [] || liftDoor.open? == true
       // move to level journey[0]
       targetLevel = journey[0]
   }
 
   addLevel(level) {
-    case
-      when direction == 'up'
-        journey.add(level)
-        upJourney = mapUpJourney(journey)
-        downJourney = mapdownJourney(journey)
-        journey = upJourney + downJourney
-      when direction == 'down'
-        journey.add(level)
-        upJourney = mapUpJourney(journey)
-        downJourney = mapdownJourney(journey)
-        journey = downJourney + upJourney
-      when level.levelNumber == liftLevel
-        journey.insertAtIndex(level, 0)
+    if level is not in array
+      case
+        when direction == 'up'
+          journey.add(level)
+          upJourney = mapUpJourney(journey)
+          downJourney = mapdownJourney(journey)
+          journey = upJourney + downJourney
+        when direction == 'down'
+          journey.add(level)
+          upJourney = mapUpJourney(journey)
+          downJourney = mapdownJourney(journey)
+          journey = downJourney + upJourney
+        when level.levelNumber == liftLevel
+          journey.insertAtIndex(level, 0)
+      end
+    end
   }
 
   removeLevel {
@@ -168,7 +185,7 @@ Lift {
 
   resetLevel {
     8.00 < currentTime < 18.00 ? level = new Level(5) : level = new Level(0)
-    journey.add(level)
+    journey.add(level) unless liftLevel == level
   }
 
   private
