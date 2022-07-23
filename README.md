@@ -53,7 +53,7 @@ Functionality thoughts
 |---------------|-------------------|
 |openDoor()     |direction (Bool)   |
 |closeDoor()    |doorOpen  (Bool)   |
-|moveToLevel()  |journey   (Array)  |
+|setTargetLevel()  |journey   (Array)  |
 |addLevel()     |level     (int)    |
 |removeLevel()  |                   |
 |resetLevel()   |                   |
@@ -84,7 +84,7 @@ Functionality thoughts
 * *Add "level0" to lift's "journey" array*
   * lift.addLevel(level0)
 * *Lift travels to the first level in the "journey" array*
-  * lift.moveToLevel()
+  * lift.setTargetLevel()
 * *Lift removes "level0" from "journey" array once the floor level == first level in journey array*
   * lift.removeLevel()
 * *Doors open and set timeout for doors to close*
@@ -123,7 +123,8 @@ class App {
   // Event handler for journey:
   case
     when lift.journey != []
-      lift.moveToLevel()
+      lift.setTargetLevel()
+      lift.move()
     when lift.journey == [] && lift.liftLevel != lift.resetLevel
       lift.addLevel(resetLevel)
   end
@@ -145,7 +146,7 @@ class Lift {
     liftDoor = liftDoor
     journey = []
     liftLevel
-    targetLevel
+    targetLevel = nil
     direction = nil
   }
 
@@ -159,7 +160,7 @@ class Lift {
     levelDoor.close()
   }
 
-  moveToLevel {
+  setTargetLevel {
     checkDirection()
     if direction == nil || liftDoor.open? == true
       targetLevel = nil
@@ -167,6 +168,11 @@ class Lift {
       // move to first level in journey array
       targetLevel = journey[0]
     end
+  }
+
+  move(targetLevel = targetLevel) {
+    // function controlls lift mechanism to move to target level
+    // default argument to be targetLevel instance variable
   }
 
   addLevel(level) {
