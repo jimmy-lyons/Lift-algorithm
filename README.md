@@ -163,11 +163,12 @@ Lift {
   }
 
   removeLevel {
-
+    journey.deleteItemAtIndex[0]
   }
 
   resetLevel {
-
+    8.00 < currentTime < 18.00 ? level = new Level(5) : level = new Level(0)
+    journey.add(level)
   }
 
   private
