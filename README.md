@@ -1,15 +1,18 @@
+<div align="center">
+
 # Lift Algorithm
 
 [![the-problem](https://img.shields.io/badge/-The%20Problem-58D68D)](#The-Problem) | 
 [![extensions](https://img.shields.io/badge/-Extensions-ABEBC6)](#Extensions) | 
-[![key-information-(medicine-chest)](https://img.shields.io/badge/-Key%20Information%20(Medicine%20Chest)-3498DB)](#Key-Information-(Medicine-Chest)) | 
-[![outline-plan-(medicine-chest)](https://img.shields.io/badge/-Outline%20Plan%20(Medicine%20Chest)-8E44AD)](#Outline-Plan-(Medicine-Chest)) | 
+[![key-information-medicine-chest](https://img.shields.io/badge/-Key%20Information%20Medicine%20Chest-3498DB)](#Key-Information-Medicine-Chest) | 
+[![outline-plan-medicine-chest](https://img.shields.io/badge/-Outline%20Plan%20Medicine%20Chest-8E44AD)](#Outline-Plan-Medicine-Chest) | 
 [![classes](https://img.shields.io/badge/-Classes-BB8FCE)](#Classes) | 
 [![usage-examples](https://img.shields.io/badge/-Usage%20Examples-BB8FCE)](#Usage-Examples) | 
 [![notes](https://img.shields.io/badge/-Notes-BB8FCE)](#Notes) | 
 [![application](https://img.shields.io/badge/-Application-E74C3C)](#Application) | 
-[![extension-(ritz)](https://img.shields.io/badge/-Extension%20(Ritz)-E67E22)](#Extension-(Ritz)) | 
+[![extension-ritz](https://img.shields.io/badge/-Extension%20Ritz-E67E22)](#Extension-Ritz) | 
 [![key-information-and-responses](https://img.shields.io/badge/-Key%20Information%20and%20Responses-F0B27A)](#Key-Information-and-Responses) | 
+</div>
 
 ## The Problem
 
@@ -35,7 +38,7 @@ AVAMAE Lift Solutions Ltd want to start selling lifts with two external buttons:
 
 ---
 
-## Key Information (Medicine Chest)
+## Key Information Medicine Chest
 
 Plus initial Thoughts/Considerations:
 
@@ -56,7 +59,7 @@ Plus initial Thoughts/Considerations:
 Functionality thoughts
 * Lifts have two sets of door: one belonging to the lift and one belonging to the level.
 ---
-## Outline Plan (Medicine Chest)
+## Outline Plan Medicine Chest
 
 ### Classes
 
@@ -309,7 +312,7 @@ class PassengerCounter {
 }
 ```
 
-## Extension (Ritz)
+## Extension Ritz
 
 Off the back of your successful design at the MedicineChest, the Ritz Hotel would you like you to design their new lift system. They are a much bigger client, and some new problems need addressing:
 
