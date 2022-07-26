@@ -97,7 +97,7 @@ These are the classes as I've originally envisaged them. They may develop throug
 
 ### Usage examples
 
-These examples are were written to help plan out how the lift should work. 
+These examples were written to help plan out how the lift should work. 
 
 **Scenario #1:** Lift is empty, lift at level 5, button pushed at level 0.
 * *Create new instance of Level with levelNumber = 0*
@@ -112,7 +112,7 @@ These examples are were written to help plan out how the lift should work.
   * lift.openDoor()
   * lift.setTimeout(5000, closeDoor())
 
-**Scenario #2:** Lift is empty, lift at level 5, button pushed at level 5, passanger wants to go to level 0
+**Scenario #2:** Lift is empty, lift at level 5, button pushed at level 5, passenger wants to go to level 0
 * *Create new instance of Level with levelNumber = 5*
   * level5 = new Level(5)
 * *Add "level5" to lift's "journey" array*
@@ -143,7 +143,7 @@ class App {
   // create new lift instance with counter and liftDoor injected on initialisation:
     lift = new Lift(counter, liftDoor)
 
-  // Create an event halndler for when a button is pushed to call the lift,
+  // Create an event handler for when a button is pushed to call the lift,
   // or when a button is pushed inside the lift.
   // Button should know the level it's assigned to to create a new instance of Level class:
   onButtonPush{
@@ -224,7 +224,7 @@ class Lift {
   }
 
   move(targetLevel = targetLevel) {
-    // function controlls lift mechanism to move to target level
+    // function controls lift mechanism to move to target level
     // default argument to be targetLevel instance variable
 
     liftCounter.exceedsMax? //return warning : //move to level
@@ -300,7 +300,7 @@ class PassengerCounter {
   //links to device for measuring number of passengers in lift. 
   //allows max to be changed, default = 6.
 
-  initilize(max = 6) {
+  initialize(max = 6) {
     max = max
     count = nil
   }
