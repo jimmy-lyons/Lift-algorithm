@@ -295,3 +295,28 @@ class PassengerCounter {
   }
 }
 ```
+
+## Extension (Ritz)
+
+Off the back of your successful design at the MedicineChest, the Ritz Hotel would you like you to design their new lift system. They are a much bigger client, and some new problems need addressing:
+
+* The hotel has 30 floors, and people are no longer distributed evenly across all of them. The ground and 15th floors are much more popular, for example.
+* The hotel would like four lifts installed instead of one.
+
+How would your original algorithm work in this new situation? Would anything have to be changed?
+AVAMAE Lift Solutions Ltd want to start selling lifts with two external buttons: one for going up and one for going down, to indicate which direction you want to travel. Would this change your lift algorithm?
+
+### Key Information and Responses
+
+* Increase from 10 to 30 floors.
+  * The increase in the number of floors would not affect the lift algorithm.
+* Level 0 and 15 are much more frequently used that other floors.
+  * The lift.resetLevel() function would need to be modified to send lifts back to popular floors.
+  * Half the lifts could reset to level 0 and the other half to level 15.
+* Four lifts are required instead of one.
+  * A function would need to be added to App class to evaluate which lifts should be sent to which call request.
+  * Lifts should be sent based on a hierarchy of information:
+    - The button push matches the direction of travel of the lift (unless the lift has gone past the floor)
+    - The lift has the least number of stops in its journey array between its current positon and the request.
+* Two external buttons to indicate direction of travel.
+  * This information would be used in the point above to determine which lift is sent to the call request.
