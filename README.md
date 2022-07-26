@@ -229,3 +229,25 @@ class Lift {
   }
 }
 ```
+
+```
+class LiftDoor {
+  initialize {
+    doorStatus = "closed"
+  }
+
+  open? {
+    doorStatus == "open" ? true : false
+  }
+
+  openDoor {
+    // controls lift door mechanism to open
+    doorStatus = "open"
+  }
+
+  closeDoor {
+    // controls lift door mechanism to close
+    doorStatus = "closed"
+  }
+}
+```
