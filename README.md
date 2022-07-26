@@ -47,6 +47,8 @@ Functionality thoughts
 
 ### Classes
 
+These are the classes as I've originally envisaged them. They may develop throughout the exercise.
+
 **Lift**
 
 |Functions      |Variables          |
@@ -69,7 +71,8 @@ Functionality thoughts
 |Functions      |Variables           |
 |---------------|--------------------|
 |openDoor()     |levelNumber (int)   |
-|closeDoor()    |doorOpen?    (bool) |
+|closeDoor()    |doorStatus   (bool) |
+|doorOpen?      |                    |
 
 **LiftDoor**
 |Functions      |Variables           |
@@ -160,21 +163,6 @@ class Lift {
     levelDoor.close()
   }
 
-  setTargetLevel {
-    checkDirection()
-    if direction == nil || liftDoor.open? == true
-      targetLevel = nil
-    else
-      // move to first level in journey array
-      targetLevel = journey[0]
-    end
-  }
-
-  move(targetLevel = targetLevel) {
-    // function controlls lift mechanism to move to target level
-    // default argument to be targetLevel instance variable
-  }
-
   addLevel(level) {
     if level is not in array
       case
@@ -192,9 +180,27 @@ class Lift {
           downJourney = mapdownJourney(journey)
           journey = downJourney + upJourney
         when level.levelNumber == liftLevel
+          // this is here to catch when someone enters the lift and presses the level they are on
           journey.insertAtIndex(level, 0)
       end
     end
+  }
+
+  setTargetLevel {
+    checkDirection()
+    if direction == nil || liftDoor.open? == true
+      targetLevel = nil
+    else
+      // move to first level in journey array
+      targetLevel = journey[0]
+    end
+  }
+
+  move(targetLevel = targetLevel) {
+    // function controlls lift mechanism to move to target level
+    // default argument to be targetLevel instance variable
+
+    liftCounter.exceedsMax? //return warning : //move to level
   }
 
   removeLevel {
@@ -248,6 +254,33 @@ class LiftDoor {
   closeDoor {
     // controls lift door mechanism to close
     doorStatus = "closed"
+  }
+}
+```
+
+```
+class Level << inherit from LiftDoor {
+  // inheritance gives the same variables and functions to level as LiftDoor
+
+  initialize (levelNumber) {
+    levelNumber = levelNumber
+  }
+}
+```
+
+```
+class PassengerCounter {
+  //links to device for measuring number of passengers in lift. 
+  //allows max to be changed, default = 6.
+
+  initilize(max = 6) {
+    max = max
+    count = nil
+  }
+
+  exceedsMax? {
+    // counts number of passengers with device
+    count > max ? true : false
   }
 }
 ```
