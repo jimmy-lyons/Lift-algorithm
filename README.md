@@ -81,6 +81,8 @@ These are the classes as I've originally envisaged them. They may develop throug
 
 ### Usage examples
 
+These examples are were written to help plan out how the lift should work. 
+
 **Scenario #1:** Lift is empty, lift at level 5, button pushed at level 0.
 * *Create new instance of Level with levelNumber = 0*
   * level0 = new Level(0)
@@ -105,6 +107,15 @@ These are the classes as I've originally envisaged them. They may develop throug
   * lift.setTimeout(5000, closeDoor())
 * *User presses level 0 button*
   * Follow same steps as scenario 1
+
+### Notes
+
+* The lift interaction and movements are abstracted out into the main (App) class
+* The lift follows a journey defined by the 'journey' array, which is an ordered list of floors
+* The order of the journey is constantly evaluated as each button press event occurs
+* The direction of travel determines where the lift adds levels to the journey
+* The Lift class is responsible for determining the lift journey
+* The LiftDoor, Level and PassengerCounter classes are injected into the lift class
 
 ## Application (Medicine Chest)
 
